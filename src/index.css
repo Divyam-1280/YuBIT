@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Noto Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --green-primary: #166534;
+  --green-secondary: #15803d;
+  --green-light: #22c55e;
+  --orange-accent: #ea580c;
+  --orange-light: #fb923c;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #22c55e transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #22c55e;
+  border-radius: 3px;
+}
+
+body {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+/* Government style header bar */
+.govt-header {
+  background: linear-gradient(135deg, #166534 0%, #15803d 50%, #166534 100%);
+}
+
+/* Tricolor accent */
+.tricolor-bar {
+  height: 4px;
+  background: linear-gradient(90deg, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%);
+}
+
+/* Card styles */
+.card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+  box-shadow: 0 4px 15px rgba(22, 101, 52, 0.3);
+}
+
+.btn-orange {
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-orange:hover {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
+}
+
+/* Calendar styles */
+.calendar-day {
+  transition: all 0.2s ease;
+}
+
+.calendar-day:hover {
+  background: #dcfce7;
+}
+
+.calendar-day.active {
+  background: #166534;
+  color: white;
+  font-weight: 600;
+}
+
+.calendar-day.has-meals::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+}
+
+/* Yoga pose card accent */
+.yoga-pose-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ea580c, #f97316, #fb923c);
+}
+
+/* Emblem shadow */
+.emblem-shadow {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Gradient text */
+.gradient-text-green {
+  background: linear-gradient(135deg, #166534 0%, #22c55e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Government notice box */
+.notice-box {
+  background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+  border-left: 4px solid #f59e0b;
+}
+
+/* Section divider */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #22c55e, transparent);
+}
