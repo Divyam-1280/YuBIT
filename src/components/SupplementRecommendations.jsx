@@ -5,7 +5,7 @@ export default function SupplementRecommendations({ dailyAnalysis, analyzing, on
     const [locating, setLocating] = useState(false);
     const [locationError, setLocationError] = useState('');
 
-    const findNearbyKendra = () => {
+    const findNearbyKendra = (retry = false) => {
         setLocating(true);
         setLocationError('');
 
@@ -15,6 +15,13 @@ export default function SupplementRecommendations({ dailyAnalysis, analyzing, on
             return;
         }
 
+        // Use lower accuracy for faster response, increase timeout
+        const options = {
+            enableHighAccuracy: false, // Faster, uses network location
+            timeout: 30000, // 30 seconds
+            maximumAge: 600000 // Cache for 10 minutes
+        };
+
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
@@ -23,22 +30,31 @@ export default function SupplementRecommendations({ dailyAnalysis, analyzing, on
                 setLocating(false);
             },
             (error) => {
-                let errorMsg = 'Unable to get your location';
+                setLocating(false);
+
+                // On timeout, offer to retry or search without location
+                if (error.code === error.TIMEOUT && !retry) {
+                    setLocationError('Location is taking too long. Retrying...');
+                    // Retry once with even more relaxed settings
+                    setTimeout(() => findNearbyKendra(true), 500);
+                    return;
+                }
+
+                let errorMsg = 'Unable to get your location. ';
                 switch (error.code) {
                     case error.PERMISSION_DENIED:
-                        errorMsg = 'Location permission denied.';
+                        errorMsg = 'Location permission denied. Please enable location access.';
                         break;
                     case error.POSITION_UNAVAILABLE:
-                        errorMsg = 'Location unavailable.';
+                        errorMsg = 'Location unavailable. Try the Search button instead.';
                         break;
                     case error.TIMEOUT:
-                        errorMsg = 'Location request timed out.';
+                        errorMsg = 'Location timed out. Try the Search button instead.';
                         break;
                 }
                 setLocationError(errorMsg);
-                setLocating(false);
             },
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+            options
         );
     };
 
@@ -154,14 +170,14 @@ export default function SupplementRecommendations({ dailyAnalysis, analyzing, on
                         <div
                             key={index}
                             className={`rounded-lg p-3 border ${def.severity === 'high' ? 'bg-red-50 border-red-200' :
-                                    def.severity === 'medium' ? 'bg-orange-50 border-orange-200' :
-                                        'bg-yellow-50 border-yellow-200'
+                                def.severity === 'medium' ? 'bg-orange-50 border-orange-200' :
+                                    'bg-yellow-50 border-yellow-200'
                                 }`}
                         >
                             <div className="flex items-start gap-2">
                                 <span className={`text-xs font-semibold px-2 py-0.5 rounded ${def.severity === 'high' ? 'bg-red-200 text-red-800' :
-                                        def.severity === 'medium' ? 'bg-orange-200 text-orange-800' :
-                                            'bg-yellow-200 text-yellow-800'
+                                    def.severity === 'medium' ? 'bg-orange-200 text-orange-800' :
+                                        'bg-yellow-200 text-yellow-800'
                                     }`}>
                                     {def.severity}
                                 </span>
