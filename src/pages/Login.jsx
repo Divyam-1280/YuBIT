@@ -81,11 +81,13 @@ export default function Login() {
     };
 
     const handleDummyLogin = () => {
-        setFormData({
-            name: '',
-            email: 'demo@yufit.gov.in',
-            password: 'demo123'
+        const demoUser = DUMMY_ACCOUNTS[0];
+        login({
+            name: demoUser.name,
+            email: demoUser.email,
+            apiKey: import.meta.env.VITE_GEMINI_API_KEY
         });
+        navigate('/');
     };
 
     return (

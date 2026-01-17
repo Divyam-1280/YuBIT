@@ -34,9 +34,7 @@ function AppRoutes() {
         <Routes>
             <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
             <Route path="/" element={
-                <ProtectedRoute>
-                    <Layout><Home /></Layout>
-                </ProtectedRoute>
+                <Layout><Home /></Layout>
             } />
             <Route path="/meals" element={
                 <ProtectedRoute>
