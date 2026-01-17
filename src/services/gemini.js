@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 
-const HARDCODED_API_KEY = "AIzaSyAyoe_X9Wo82lfCsPvnrI3iDd2MCH_9YoE";
-const ai = new GoogleGenAI({ apiKey: HARDCODED_API_KEY });
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 export const analyzeMeal = async (mealDescription) => {
   const prompt = `

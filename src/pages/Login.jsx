@@ -38,7 +38,7 @@ export default function Login() {
                 login({
                     name: user.name,
                     email: user.email,
-                    apiKey: "AIzaSyAyoe_X9Wo82lfCsPvnrI3iDd2MCH_9YoE"
+                    apiKey: import.meta.env.VITE_GEMINI_API_KEY
                 });
                 navigate('/');
             } else {
@@ -74,7 +74,7 @@ export default function Login() {
             login({
                 name: newUser.name,
                 email: newUser.email,
-                apiKey: "AIzaSyAyoe_X9Wo82lfCsPvnrI3iDd2MCH_9YoE"
+                apiKey: import.meta.env.VITE_GEMINI_API_KEY
             });
             navigate('/');
         }
@@ -118,8 +118,8 @@ export default function Login() {
                             <button
                                 onClick={() => { setIsLogin(true); setError(''); }}
                                 className={`flex-1 py-4 text-center font-semibold transition-all ${isLogin
-                                        ? 'text-green-700 border-b-2 border-green-700 bg-green-50'
-                                        : 'text-gray-500 hover:text-gray-700'
+                                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50'
+                                    : 'text-gray-500 hover:text-gray-700'
                                     }`}
                             >
                                 <LogIn size={18} className="inline mr-2" />
@@ -128,8 +128,8 @@ export default function Login() {
                             <button
                                 onClick={() => { setIsLogin(false); setError(''); }}
                                 className={`flex-1 py-4 text-center font-semibold transition-all ${!isLogin
-                                        ? 'text-green-700 border-b-2 border-green-700 bg-green-50'
-                                        : 'text-gray-500 hover:text-gray-700'
+                                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50'
+                                    : 'text-gray-500 hover:text-gray-700'
                                     }`}
                             >
                                 <UserPlus size={18} className="inline mr-2" />
